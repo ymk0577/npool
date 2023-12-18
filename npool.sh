@@ -72,11 +72,6 @@ Download()
 Install_NPool()
 {
     echo "Start Install......"
-    ulimit -n 1000000
-    echo "root  soft  nofile  10000000" >> /etc/security/limits.conf
-    echo "ubuntu  soft  nofile  10000000" >> /etc/security/limits.conf
-    echo "DefaultLimitNOFILE=10000000" >> /etc/systemd/user.conf
-    echo "DefaultLimitNOFILE=10000000" >> /etc/systemd/system.conf
     cat > /etc/systemd/system/npool.service <<End-of-file
 [Unit]
 Description=npool server
