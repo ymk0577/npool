@@ -1,4 +1,4 @@
-# npool
+# Npool
 This Npool is a modified non-Npool official NKN mining pool installation script.
 The script file comes from the official file, and only some codes are added/modified/deleted according to personal needs to suit personal use needs.
 
