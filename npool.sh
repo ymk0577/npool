@@ -98,7 +98,6 @@ if command -v apt-get > /dev/null 2>&1; then
 	echo "Installing necessary libraries..."
 	echo "---------------------------"
 	apt-get install -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" -y --force-yes make curl git unzip whois
-	apt-get install -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" -y --force-yes ufw
 	apt-get install -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" -y --force-yes unzip jq
 	ufw allow 30001:30005/tcp > /dev/null 2>&1
 	ufw allow 30001:30005/udp > /dev/null 2>&1
@@ -107,7 +106,6 @@ if command -v apt-get > /dev/null 2>&1; then
 	ufw allow 443 > /dev/null 2>&1
 	ufw allow 32768:65535/tcp > /dev/null 2>&1
 	ufw allow 32768:65535/udp > /dev/null 2>&1
-	ufw --force enable > /dev/null 2>&1
 fi
 
 # Log file limit
