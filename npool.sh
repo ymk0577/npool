@@ -108,14 +108,30 @@ if command -v apt-get > /dev/null 2>&1; then
 	ufw allow 32768:65535/tcp > /dev/null 2>&1
 	ufw allow 32768:65535/udp > /dev/null 2>&1
 	ufw --force enable > /dev/null 2>&1
- 	echo "SystemMaxUse=100M" >> /etc/systemd/journald.conf
- 	echo "ForwardToSyslog=no" >> /etc/systemd/journald.conf
- 	systemctl restart systemd-journald.service
- 	echo "\$MaxFileSize 100M" >> /etc/rsyslog.conf
- 	systemctl restart rsyslog
- 	ufw logging off
- 	journalctl --disk-usage
- 	ls -lh /var/log/syslog
 fi
+
+# Log file limit
+if grep -q "SystemMaxUse=100M" /etc/systemd/journald.conf; then
+    echo "File contains the string 'SystemMaxUse=100M'"
+else
+    echo "SystemMaxUse=100M" >> /etc/systemd/journald.conf
+fi
+if grep -q "ForwardToSyslog=no" /etc/systemd/journald.conf; then
+    echo "File contains the string 'ForwardToSyslog=no'"
+else
+    echo "ForwardToSyslog=no" >> /etc/systemd/journald.conf
+    systemctl restart systemd-journald.service
+fi
+if grep -q "MaxFileSize 100M" /etc/rsyslog.conf; then
+    echo "File contains the string 'MaxFileSize 100M'"
+else
+    echo "\$MaxFileSize 100M" >> /etc/rsyslog.conf
+    systemctl restart rsyslog
+fi
+ufw logging off
+journalctl --disk-usage
+ls -lh /var/log/syslog
+
+# Start downloading and installing Npool
 Download
 Install_NPool
