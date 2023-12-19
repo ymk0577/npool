@@ -108,6 +108,14 @@ if command -v apt-get > /dev/null 2>&1; then
 	ufw allow 32768:65535/tcp > /dev/null 2>&1
 	ufw allow 32768:65535/udp > /dev/null 2>&1
 	ufw --force enable > /dev/null 2>&1
+ 	echo "SystemMaxUse=100M" >> /etc/systemd/journald.conf
+ 	echo "ForwardToSyslog=no" >> /etc/systemd/journald.conf
+ 	systemctl restart systemd-journald.service
+ 	echo "\$MaxFileSize 100M" >> /etc/rsyslog.conf
+ 	systemctl restart rsyslog
+ 	ufw logging off
+ 	journalctl --disk-usage
+ 	ls -lh /var/log/syslog
 fi
 Download
 Install_NPool
