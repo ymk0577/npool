@@ -113,20 +113,28 @@ if grep -q "SystemMaxUse=100M" /etc/systemd/journald.conf; then
     echo "File contains the string 'SystemMaxUse=100M'"
 else
     echo "SystemMaxUse=100M" >> /etc/systemd/journald.conf
+    echo "SystemMaxUse=100M Add execution completed.."
 fi
 if grep -q "ForwardToSyslog=no" /etc/systemd/journald.conf; then
     echo "File contains the string 'ForwardToSyslog=no'"
 else
     echo "ForwardToSyslog=no" >> /etc/systemd/journald.conf
     systemctl restart systemd-journald.service
+    echo "ForwardToSyslog=no Add execution completed.."
 fi
 if grep -q "MaxFileSize 100M" /etc/rsyslog.conf; then
     echo "File contains the string 'MaxFileSize 100M'"
 else
     echo "\$MaxFileSize 100M" >> /etc/rsyslog.conf
     systemctl restart rsyslog
+    echo "MaxFileSize 100M Add execution completed.."
 fi
+
 ufw logging off
+echo "ufw logging off Execution complete.."
+
+# Display the space occupied by log files.
+echo "The following is the space occupied by the current log file.."
 journalctl --disk-usage
 ls -lh /var/log/syslog
 
