@@ -104,8 +104,7 @@ if command -v apt-get > /dev/null 2>&1; then
 	ufw allow 22 > /dev/null 2>&1
 	ufw allow 80 > /dev/null 2>&1
 	ufw allow 443 > /dev/null 2>&1
-	ufw allow 32768:65535/tcp > /dev/null 2>&1
-	ufw allow 32768:65535/udp > /dev/null 2>&1
+ 	ufw allow 30088 > /dev/null 2>&1
 fi
 
 # Log file limit
